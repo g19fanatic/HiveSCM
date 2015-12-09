@@ -4,12 +4,13 @@ Distributed, standalone, issue tracking system
 ## Setting up the dev environment
 using a `virtualenv` for python
 run the following to get setup:
-`virtualenv --no-site-packages virt`
+`virtualenv --no-site-packages --distribute virt`
 `source virt/bin/activate` or `source virt/scripts/activate`
 `pip install -r requirements.txt`
+`source virt/scripts/activate'`
 
 ## Building the pyinstaller exe for distribution
-TODO
+`pyinstall --onefile -n HiveSCM app.py`
 
 ## Distribution
 Copy the `dist` folder contents into any repo you want tracked.
