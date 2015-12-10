@@ -14,9 +14,14 @@ def send_js(path):
 @app.route('/css/<path:filename>')
 def send_css(filename):
     return send_from_directory('data/css/', filename)
+
 @app.route('/')
 def index():
     return send_from_directory('data/', "index.html")
+
+@app.route('/ticket/<path:p>')
+def returnToIndex(p):
+    return index()
 
 if __name__ == "__main__":
 

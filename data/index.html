@@ -1,21 +1,29 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="/css/unsemantic-grid-responsive.css">
-        <script src="/js/angular.min.js"></script>
-        <script src="/js/angular-route.min.js"></script>
-        <script src="/js/controllers.js"></script>
-        <script src="/js/app.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/unsemantic-grid-responsive.css" />
+        <script src="/js/angular.min.js" />
+        <script src="/js/angular-route.min.js" />
+        <script src="/js/app.js" />
+        <script src="/js/providers.js" />
+        <script src="/js/controllers.js" />
     </head>
     <body>
-        <div class="grid-container">
-          <div id="topMenu" class="push-5 grid-90 suffix-5"> </div>
+      <div class="grid-container" ng-app="hiveApp">
+        <div ng-controller="MainController">
+          <div id="topMenu" class="push-5 grid-90 suffix-5">
+            <ul>
+              <li><a href="/ticket/list">List Tickets</a></li>
+              <li><a href="/ticket/create">Create Ticket</a></li>
+            </ul>
+          </div>
           <div id="logo" class="push-15 grid-70 suffix-15"> </div>
           <div id="bottomMenu" class="push-10 grid-80 suffix-10"> </div>
-          <div id="content" class="push-10 grid-80 suffix-10">
-            Test Data
+          <div id="content" class="push-10 grid-80 suffix-10 parent-grid">
+            <div ng-view> </div>
           </div>
           <div id="footer" class="push-5 grid-90 suffix-5"> </div>
         </div>
+      </div>
     </body>
 </html>
