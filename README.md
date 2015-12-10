@@ -8,14 +8,6 @@ using a `virtualenv` for python, run the following to get setup:
 - `pip install -r requirements.txt`
 - `source virt/scripts/activate'`
 
-## Building the pyinstaller exe for distribution
-`pyinstall --onefile -n HiveSCM app.py`
-
-## Distribution
-Copy the `dist` folder contents into any repo you want tracked.
-
-It should contain everything necessary to get going.
-
 ## Contributing
 - File an issue for any features/bugs
 - Fork the repo
