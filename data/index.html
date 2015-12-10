@@ -1,11 +1,21 @@
 <!doctype html>
 <html lang="en" ng-app="phonecatApp">
     <head>
-        <script src="js/angular-min.js"></script>
-        <script src="js/angular-route-min.js"></script>
-        <script src="js/controllers.js"></script>
-        <script src="js/app.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/unsemantic-grid-responsive.css">
+        <script src="/js/angular.min.js"></script>
+        <script src="/js/angular-route.min.js"></script>
+        <script src="/js/controllers.js"></script>
+        <script src="/js/app.js"></script>
     </head>
     <body>
+        <div class="grid-container">
+          <div id="topMenu" class="push-5 grid-90 suffix-5"> </div>
+          <div id="logo" class="push-15 grid-70 suffix-15"> </div>
+          <div id="bottomMenu" class="push-10 grid-80 suffix-10"> </div>
+          <div id="content" class="push-10 grid-80 suffix-10">
+            Test Data
+          </div>
+          <div id="footer" class="push-5 grid-90 suffix-5"> </div>
+        </div>
     </body>
 </html>

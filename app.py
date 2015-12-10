@@ -1,15 +1,22 @@
-from flask import Flask, request, url_for, redirect
+from flask import Flask, request, url_for, redirect, send_from_directory
 from werkzeug.serving import run_simple
 from werkzeug.debug import DebuggedApplication
 
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None)
 app.debug = True
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('data/js', path)
+
+@app.route('/css/<path:filename>')
+def send_css(filename):
+    return send_from_directory('data/css/', filename)
+@app.route('/')
 def index():
-  return "Nothing to see here"
+    return send_from_directory('data/', "index.html")
 
 if __name__ == "__main__":
 
