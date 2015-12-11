@@ -1,6 +1,6 @@
 hiveApp.config(function($routeProvider, $locationProvider, $logProvider) {
   $routeProvider.when('/', {
-      controller: 'MainController'
+      redirectTo: '/ticket/list'
     });
 
   $routeProvider.when('/ticket/create', {
