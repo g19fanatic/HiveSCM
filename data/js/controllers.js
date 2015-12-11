@@ -13,7 +13,10 @@ hiveApp.config(function($routeProvider, $locationProvider, $logProvider) {
       controller: 'ViewTicketController'
     });
 
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
     $logProvider.debugEnabled(true);
 });
 
@@ -22,7 +25,7 @@ hiveApp.directive('jMenu',function() {
     restrict: "A",
     link : function(scope, element, attrs) {
       console.log('hit jMenu');
-      $(element).menu();
+      element.menu();
     }
   }
 });
@@ -31,12 +34,10 @@ hiveApp.controller('MainController',['$scope', '$route', function($scope, $route
   $scope.route = $route;
 }]);
 
-hiveApp.controller('CreateTicketController', ['$scope', '$routeParams', 'UserService', 'LabelService', function($scope, $routeParams, UserService, LabelService) {
-  $scope.params = $routeParams;
+hiveApp.controller('CreateTicketController', ['$scope', 'UserService', 'LabelService', function($scope, UserService, LabelService) {
 }]);
 
-hiveApp.controller('ListTicketsController',['$scope', '$routeParams', 'TicketService', function($scope, $routeParams, TicketService) {
-  $scope.params = $routeParams;
+hiveApp.controller('ListTicketsController',['$scope', 'TicketService', function($scope, TicketService) {
 }]);
 
 hiveApp.controller('ViewTicketController',['$scope', '$routeParams', 'TicketService', function($scope, $routeParams, TicketService) {
