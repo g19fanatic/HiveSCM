@@ -1,18 +1,34 @@
 # HiveSCM
 Distributed, standalone, issue tracking system
 
-## Setting up the dev environment
+Each individual issue/ticket is tracked in a json file that goes along with your repo.<br>
+This allows the repo to keep track of its bugs and have a distributed SCM system.<br>
+
+No installations necessary to run, just a virtualenv folder copy<br>
+Hopefully to be a pyinstaller/py2exe/cx_freeze single executable someday
+
+## Setting up the dev environment 
+To create the initial 'virt' virtualenv
+
 using a `virtualenv` for python, run the following to get setup:
+- `cd HiveSCM`
 - `virtualenv --no-site-packages --distribute virt`
 - `source virt/bin/activate` or `source virt/scripts/activate`
 - `pip install -r requirements.txt`
-- `source virt/scripts/activate'`
+
+Once you have the virt folder, you can get to the tracker by:
+- 'sourcing' the activate file and `python app.py`
+- running the included `run_app.bat` which should just start up the 'server'
+
+## To add to other repos (once you have a 'virt' setup)
+- `git clone` this repo into  `/<yourRepo/HiveSCM`
+- copy your 'virt' folder to the same directory
+- execute `run_app.bat`
 
 ## Contributing
 - File an issue for any features/bugs
 - Fork the repo
 - Create a feature/bug branch off of the `develop` branch
-- Do your fix in your own repo
 - Submit a pull request when you're finished
 
 Please squash commits to be as compressed and logically necessary for the issue
