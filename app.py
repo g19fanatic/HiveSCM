@@ -16,6 +16,10 @@ def send_js(path):
 def send_css(filename):
     return send_from_directory('data/css/', filename)
 
+@app.route('/pages/<path:filename>')
+def send_datapages(filename):
+    return send_from_directory('data/pages/', filename)
+
 @app.route('/')
 def index():
     return make_response(open('data/index.html').read())

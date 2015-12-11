@@ -1,16 +1,20 @@
 hiveApp.config(function($routeProvider, $locationProvider, $logProvider) {
+  $routeProvider.when('/', {
+      controller: 'MainController'
+    });
+
   $routeProvider.when('/ticket/create', {
-      templateUrl: 'data/pages/create_issue.html',
+      templateUrl: '/pages/create_issue.html',
       controller: 'CreateTicketController'
     });
 
     $routeProvider.when('/ticket/list', {
-      templateUrl: 'data/pages/list_issues.html',
+      templateUrl: '/pages/list_issues.html',
       controller: 'ListTicketsController'
     });
 
     $routeProvider.when('/ticket/view/:ticketID', {
-      templateUrl: 'data/pages/view_issue.html',
+      templateUrl: '/pages/view_issue.html',
       controller: 'ViewTicketController'
     });
 
