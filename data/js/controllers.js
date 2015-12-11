@@ -1,4 +1,4 @@
-hiveApp.config(function($routeProvider, $locationProvider) {
+hiveApp.config(function($routeProvider, $locationProvider, $logProvider) {
   $routeProvider
     .when('/ticket/create', {
       templateUrl: 'data/pages/create_issue.html',
@@ -14,21 +14,31 @@ hiveApp.config(function($routeProvider, $locationProvider) {
     });
 
     $locationProvider.html5Mode(true);
+    $logProvider.debugEnabled(true);
 });
 
-hiveApp.controller('MainController', function($scope, $route, $location) {
+hiveApp.directive('jMenu',function() {
+  return {
+    restrict: "A",
+    link : function(scope, element, attrs) {
+      console.log('hit jMenu');
+      $(element).menu();
+    }
+  }
+});
+
+hiveApp.controller('MainController',['$scope', '$route', function($scope, $route) {
   $scope.route = $route;
-  $scope.location = $location;
-});
+}]);
 
-hiveApp.controller('CreateTicketController', function($scope, $routeParams, UserService, LabelService) {
+hiveApp.controller('CreateTicketController', ['$scope', '$routeParams', 'UserService', 'LabelService', function($scope, $routeParams, UserService, LabelService) {
   $scope.params = $routeParams;
-});
+}]);
 
-hiveApp.controller('ListTicketsController', function($scope, $routeParams, TicketService) {
+hiveApp.controller('ListTicketsController',['$scope', '$routeParams', 'TicketService', function($scope, $routeParams, TicketService) {
   $scope.params = $routeParams;
-});
+}]);
 
-hiveApp.controller('ViewTicketController', function($scope, $routeParams, TicketService) {
+hiveApp.controller('ViewTicketController',['$scope', '$routeParams', 'TicketService', function($scope, $routeParams, TicketService) {
   $scope.params = $routeParams;
-});
+}]);

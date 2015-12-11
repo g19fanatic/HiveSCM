@@ -15,6 +15,10 @@ def send_js(path):
 def send_css(filename):
     return send_from_directory('data/css/', filename)
 
+@app.route('/images/<path:path>')
+def send_images(path):
+    return send_from_directory('data/images/', path)
+
 @app.route('/')
 def index():
     return send_from_directory('data/', "index.html")

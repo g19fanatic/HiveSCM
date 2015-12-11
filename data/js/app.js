@@ -1,3 +1,4 @@
+
 var TicketActionEnum = Object.freeze({
   OPENED:"OPENED",
   ASSIGNED:"ASSIGNED",
@@ -29,4 +30,5 @@ var data = {
   labels: [],
   configuration: {}
 };
+
 var hiveApp = angular.module("hiveApp", ['ngRoute']);
