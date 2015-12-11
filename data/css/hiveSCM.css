@@ -1,6 +1,4 @@
-/* Clearfix for the menu */
 .ui-menu:after {
-    content: ".";
     display: block;
     clear: both;
     visibility: hidden;
@@ -10,8 +8,17 @@
 
 .ui-menu .ui-menu-item {
     display: inline-block;
-    float: left;
-    margin: 0;
-    padding: 0;
     width: auto;
+    margin: auto;
+    border: 1px solid #aaa;
+}
+
+.ui-menu .ui-menu-item a {
+  text-decoration: none;
+ }
+
+ul[j-menu] {
+  margin: auto;
+  text-align: center;
+  border: 0px solid #aaa;
 }

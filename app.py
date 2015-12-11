@@ -1,4 +1,5 @@
-from flask import Flask, request, url_for, redirect, send_from_directory
+from flask import Flask, request, url_for
+from flask import redirect, send_from_directory, make_response
 from werkzeug.serving import run_simple
 from werkzeug.debug import DebuggedApplication
 
@@ -15,13 +16,9 @@ def send_js(path):
 def send_css(filename):
     return send_from_directory('data/css/', filename)
 
-@app.route('/images/<path:path>')
-def send_images(path):
-    return send_from_directory('data/images/', path)
-
 @app.route('/')
 def index():
-    return send_from_directory('data/', "index.html")
+    return make_response(open('data/index.html').read())
 
 @app.route('/ticket/<path:p>')
 def returnToIndex(p):
