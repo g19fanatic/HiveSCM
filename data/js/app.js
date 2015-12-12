@@ -24,6 +24,11 @@ function Ticket() {
   this.history=[];
 }
 
+function RepoConfig() {
+  this.repoName="";
+  this.repoDesc="";
+}
+
 var data = {
   tickets: [],
   users: [],

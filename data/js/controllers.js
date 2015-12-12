@@ -29,14 +29,14 @@ hiveApp.directive('jMenu',function() {
   return {
     restrict: "A",
     link : function(scope, element, attrs) {
-      console.log('hit jMenu');
       element.menu();
     }
   }
 });
 
-hiveApp.controller('MainController',['$scope', '$route', function($scope, $route) {
+hiveApp.controller('MainController',['$scope', '$route', 'ConfigurationService', function($scope, $route, ConfigurationService) {
   $scope.route = $route;
+  $scope.configData = ConfigurationService.getConfig();
 }]);
 
 hiveApp.controller('CreateTicketController', ['$scope', 'UserService', 'LabelService', function($scope, UserService, LabelService) {

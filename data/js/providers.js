@@ -16,5 +16,16 @@ hiveApp.service('LabelService', function($http) {
 });
 
 hiveApp.service('ConfigurationService', function($http) {
-  //get the configuration from server and return it
+  return {
+    getConfig: function() {
+      $http( {
+        method: 'GET',
+        url: '/api/config'
+      }).then(function successCallback(response) {
+        return response.data;
+      }, function errorCallback(response) {
+        console.log("ConfigurationService - getConfig - Error: " + response.status + " " + response.statusText);
+      })
+    }
+  };
 });
