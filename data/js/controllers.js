@@ -35,8 +35,15 @@ hiveApp.directive('jMenu',function() {
 });
 
 hiveApp.controller('MainController',['$scope', '$route', 'ConfigurationService', function($scope, $route, ConfigurationService) {
+  ConfigurationService.getConfig().then(function successCallback(response) {
+      $scope.repoName = response.data.repoName;
+      $scope.repoDesc = response.data.repoDesc;
+      console.log('config hit: ' + $scope.repoName);
+      console.log('config hit: ' + $scope.repoDesc);
+    }, function errorCallback(response) {
+      console.log("ConfigurationService - getConfig - Error: " + response.status + " " + response.statusText);
+    });
   $scope.route = $route;
-  $scope.configData = ConfigurationService.getConfig();
 }]);
 
 hiveApp.controller('CreateTicketController', ['$scope', 'UserService', 'LabelService', function($scope, UserService, LabelService) {

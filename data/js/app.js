@@ -29,11 +29,4 @@ function RepoConfig() {
   this.repoDesc="";
 }
 
-var data = {
-  tickets: [],
-  users: [],
-  labels: [],
-  configuration: {}
-};
-
 var hiveApp = angular.module("hiveApp", ['ngRoute']);
