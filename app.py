@@ -3,7 +3,11 @@ from flask import redirect, send_from_directory, make_response
 from werkzeug.serving import run_simple
 from werkzeug.debug import DebuggedApplication
 
-import os
+from os import listdir
+from os.path import isfile, join
+import json
+
+import pdb
 
 app = Flask(__name__, static_folder=None)
 app.debug = True
@@ -23,10 +27,13 @@ def send_css(filename):
 def send_datapages(filename):
     return send_from_directory('data/pages/', filename)
 
+def getFile(filename):
+    return make_response(open('data/' + filename).read())
+
 #serving default index
 @app.route('/')
 def index():
-    return make_response(open('data/index.html').read())
+    return getFile('index.html')
 
 #forward all app handled '/ticket/*' paths back to index if they hit the server (they shouldn't)
 @app.route('/ticket/<path:p>')
@@ -35,7 +42,33 @@ def returnToIndex(p):
 
 @app.route('/api/config')
 def getConfiguration():
-    return make_response(open('data/config.json').read())
+    return getFile('config.json')
+
+@app.route('/api/users')
+def getUsers():
+    return getFile('users.json')
+
+@app.route('/api/labels')
+def getLabels():
+    return getFile('labels.json')
+
+@app.route('/api/getTicketList')
+def getTicketList():
+    ticketPath = 'data/tickets'
+    return json.dumps(listdir(ticketPath))
+
+@app.route('/api/createTicket', methods=['POST'])
+def createTicket():
+    currentFiles = listdir("data/tickets");
+    ticketIds = []
+    for f in currentFiles:
+        ticketIds.append(f.strip(".json"))
+    ticketIds.sort()
+    newTicket = json.loads(request.data)['ticket']
+    newTicket['id'] = int(ticketIds[-1]) + 1
+    open('data/tickets/' + str(newTicket['id']) + '.json', 'w').write(json.dumps(newTicket))
+    return ""
+
 
 if __name__ == "__main__":
 

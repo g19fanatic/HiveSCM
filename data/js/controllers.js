@@ -1,52 +1,40 @@
-hiveApp.config(function($routeProvider, $locationProvider, $logProvider) {
-  $routeProvider.when('/', {
-      redirectTo: '/ticket/list'
-    });
-
-  $routeProvider.when('/ticket/create', {
-      templateUrl: '/pages/create_issue.html',
-      controller: 'CreateTicketController'
-    });
-
-    $routeProvider.when('/ticket/list', {
-      templateUrl: '/pages/list_issues.html',
-      controller: 'ListTicketsController'
-    });
-
-    $routeProvider.when('/ticket/view/:ticketID', {
-      templateUrl: '/pages/view_issue.html',
-      controller: 'ViewTicketController'
-    });
-
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
-    });
-    $logProvider.debugEnabled(true);
-});
-
-hiveApp.directive('jMenu',function() {
-  return {
-    restrict: "A",
-    link : function(scope, element, attrs) {
-      element.menu();
-    }
-  }
-});
-
 hiveApp.controller('MainController',['$scope', '$route', 'ConfigurationService', function($scope, $route, ConfigurationService) {
   ConfigurationService.getConfig().then(function successCallback(response) {
       $scope.repoName = response.data.repoName;
       $scope.repoDesc = response.data.repoDesc;
-      console.log('config hit: ' + $scope.repoName);
-      console.log('config hit: ' + $scope.repoDesc);
     }, function errorCallback(response) {
-      console.log("ConfigurationService - getConfig - Error: " + response.status + " " + response.statusText);
+      console.log("ConfigurationService - getConfig - error");
     });
   $scope.route = $route;
 }]);
 
-hiveApp.controller('CreateTicketController', ['$scope', 'UserService', 'LabelService', function($scope, UserService, LabelService) {
+hiveApp.controller('CreateTicketController', ['$scope', 'UserService', 'LabelService','TicketService', '$location', function($scope, UserService, LabelService, TicketService, $location) {
+  UserService.getUsers().then(function(response) {
+    $scope.userList = response.data;
+  },function(response) {
+    console.log("UserService - getUsers - error");
+  });
+
+  LabelService.getLabels().then(function(response) {
+    $scope.labelList = response.data;
+  },function(response) {
+    console.log("LabelService - getLabels - error");
+  });
+
+  $scope.ticket = new Ticket();
+  $scope.ticketHist = new TicketHistory();
+  $scope.ticketHist.actionTaken = TicketActionEnum.OPENED;
+  $scope.isSaving = false;
+
+  $scope.saveTicket = function() {
+    $scope.isSaving = true;
+    $scope.ticket.history.push($scope.ticketHist);
+    TicketService.createTicket($scope.ticket).then(function success(response) {
+      $location.url('/');
+    },function error(response) {
+      console.log("TicketService - createTicket - error")
+    });
+  };
 }]);
 
 hiveApp.controller('ListTicketsController',['$scope', 'TicketService', function($scope, TicketService) {

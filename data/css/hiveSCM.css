@@ -22,3 +22,11 @@ ul[j-menu] {
   text-align: center;
   border: 0px solid #aaa;
 }
+
+.create-form input.ng-invalid.ng-touched {
+  background-color: #FA787E;
+}
+
+.create-form input.ng-valid.ng-touched {
+  background-color: #78FA89;
+}

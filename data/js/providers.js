@@ -1,28 +1,37 @@
 hiveApp.service('TicketService', function($http) {
   return {
-    createTicket: function(ticket) {},
-    getTicketList: function() {},
+    createTicket: function(ticket) {
+      return $http.post('/api/createTicket',{"ticket" : ticket});
+    },
+    getTicketList: function() {
+      return $http.get('/api/getTicketList');
+    },
     getTicketInfo: function() {},
     updateTicket: function(ticket) {},
   };
 });
 
 hiveApp.service('UserService', function($http) {
-  //get user list from server and return it
+  return {
+    getUsers: function() {
+      return $http.get('/api/users');
+    }
+  };
 });
 
 hiveApp.service('LabelService', function($http) {
-  //get labels list from server and return it
+  return {
+    getLabels: function() {
+      return $http.get('/api/labels');
+    }
+  };
 });
 
 //returns http promise
 hiveApp.service('ConfigurationService', function($http) {
   return {
     getConfig: function() {
-       return $http( {
-        method: 'GET',
-        url: '/api/config'
-      });
+       return $http.get('/api/config');
     }
   };
 });

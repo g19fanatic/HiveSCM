@@ -30,3 +30,30 @@ function RepoConfig() {
 }
 
 var hiveApp = angular.module("hiveApp", ['ngRoute']);
+
+hiveApp.config(function($routeProvider, $locationProvider, $logProvider) {
+  $routeProvider.when('/', {
+      redirectTo: '/ticket/list'
+    });
+
+  $routeProvider.when('/ticket/create', {
+      templateUrl: '/pages/create_issue.html',
+      controller: 'CreateTicketController'
+    });
+
+    $routeProvider.when('/ticket/list', {
+      templateUrl: '/pages/list_issues.html',
+      controller: 'ListTicketsController'
+    });
+
+    $routeProvider.when('/ticket/view/:ticketID', {
+      templateUrl: '/pages/view_issue.html',
+      controller: 'ViewTicketController'
+    });
+
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
+    $logProvider.debugEnabled(true);
+});

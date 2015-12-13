@@ -14,26 +14,25 @@
 
         <script src="/js/app.js" /></script>
         <script src="/js/providers.js" /></script>
+        <script src="/js/directives.js" /></script>
         <script src="/js/controllers.js" /></script>
     </head>
     <body>
       <div class="grid-container" ng-app="hiveApp">
         <div ng-controller="MainController">
-          <div id="topMenu" class="push-5 grid-90 suffix-5"></div>
-          <div id="logo" class="push-15 grid-70 suffix-15">
+          <div id="topMenu" class="prefix-5 grid-90 suffix-5"></div>
+          <div id="logo" class="prefix-15 grid-70 suffix-15">
             <h2>{{repoName}}</h2><br>
             <h4>{{repoDesc}}</h3>
           </div>
-          <div id="bottomMenu" class="push-10 grid-80 suffix-10">
+          <div id="bottomMenu" class="prefix-10 grid-80 suffix-10">
             <ul j-menu>
               <li><a href="/ticket/list">List Tickets</a></li>
               <li><a href="/ticket/create">Create Ticket</a></li>
             </ul><br /><hr />
           </div>
-          <div id="content" class="push-10 grid-80 suffix-10 parent-grid">
-            <div ng-view> </div>
-          </div>
-          <div id="footer" class="push-5 grid-90 suffix-5"> </div>
+          <div id="content" class="prefix-10 grid-80 suffix-10 parent-grid" ng-view></div>
+          <div id="footer" class="prefix-5 grid-90 suffix-5"> </div>
         </div>
       </div>
     </body>

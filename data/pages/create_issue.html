@@ -1,1 +1,17 @@
-Create Issue
+<h2>Create New Ticket</h2>
+
+<form validate class='create-form'>
+  Title: <input type="text" ng-model="ticket.title" required /><br />
+  Created By: <select ng-model="ticket.createdBy" ng-change="ticketHist.enteredBy=ticket.createdBy" required >
+                <option ng-repeat="user in userList" value="{{user}}">{{user}}</option>
+              </select><br />
+  Assigned To: <select ng-model="ticket.assignedTo">
+                 <option value=''></option>
+                 <option ng-repeat="user in userList" value="{{user}}">{{user}}</option>
+               </select> <br />
+  Description: <textarea ng-model="ticketHist.description" required /><br />
+  Labels: <select ng-model="ticket.labels" multiple >
+            <option ng-repeat="label in labelList" value="{{label}}">{{label}}</option>
+          </select><br />
+  <button type="submit" ng-click='saveTicket()' ng-disabled='isSaving' >Create Ticket</button>
+</form>
