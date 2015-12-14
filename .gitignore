@@ -58,3 +58,4 @@ target/
 
 # project level ignores
 virt/
+data/tickets/
