@@ -66,7 +66,8 @@ def createTicket():
     ticketIds.sort()
     newTicket = json.loads(request.data)['ticket']
     newTicket['id'] = int(ticketIds[-1]) + 1
-    open('data/tickets/' + str(newTicket['id']) + '.json', 'w').write(json.dumps(newTicket))
+    jsonData = json.dumps(newTicket, indent=4, sort_keys=True)
+    open('data/tickets/' + str(newTicket['id']) + '.json', 'w').write(jsonData)
     return ""
 
 
