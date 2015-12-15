@@ -46,7 +46,7 @@ hiveApp.config(function($routeProvider, $locationProvider, $logProvider) {
       controller: 'ListTicketsController'
     });
 
-    $routeProvider.when('/ticket/view/:ticketID', {
+    $routeProvider.when('/ticket/view/:ticketId', {
       templateUrl: '/pages/view_issue.html',
       controller: 'ViewTicketController'
     });

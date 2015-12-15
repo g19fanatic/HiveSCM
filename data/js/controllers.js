@@ -37,9 +37,36 @@ hiveApp.controller('CreateTicketController', ['$scope', 'UserService', 'LabelSer
   };
 }]);
 
-hiveApp.controller('ListTicketsController',['$scope', 'TicketService', function($scope, TicketService) {
+hiveApp.controller('ListTicketsController',['$scope', 'TicketService', 'hiveCache', function($scope, TicketService, hiveCache) {
+  TicketService.getTicketList().then(function success(response) {
+    hiveCache.put('tickets', response.data.tickets);
+    $scope.tickets = hiveCache.get('tickets');
+  }, function error(response) {
+    console.log("TicketService - getTicketList - error");
+  });
+
 }]);
 
-hiveApp.controller('ViewTicketController',['$scope', '$routeParams', 'TicketService', function($scope, $routeParams, TicketService) {
+hiveApp.controller('ViewTicketController',['$scope', '$routeParams', 'TicketService', 'hiveCache', '$location', function($scope, $routeParams, TicketService, hiveCache, $location) {
   $scope.params = $routeParams;
+
+  hiveCacheInfo = hiveCache.info();
+  if (hiveCacheInfo.size < 1)
+  {
+    TicketService.getTicketInfo($scope.params.ticketId).then(function success(response) {
+      ticket = response.data;
+      if (ticket.id != $scope.params.ticketId) {
+        $location.url('/');
+      } else {
+        $scope.ticket = ticket;
+      }
+    },function error(response) {});
+  } else {
+    for (ticket of hiveCache.get('tickets')) {
+      if ($scope.params.ticketId == ticket.id) {
+        ticketSet = true;
+        $scope.ticket = ticket;
+      }
+    }
+  }
 }]);

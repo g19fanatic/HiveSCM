@@ -30,3 +30,15 @@ ul[j-menu] {
 .create-form input.ng-valid.ng-touched {
   background-color: #78FA89;
 }
+
+.small-text {
+  font-size: 0.75em;
+}
+
+.smaller-text {
+  font-size: 0.5em;
+}
+
+.smallest-text {
+  font-size: 0.25em;
+}

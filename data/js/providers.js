@@ -4,9 +4,11 @@ hiveApp.service('TicketService', function($http) {
       return $http.post('/api/createTicket',{"ticket" : ticket});
     },
     getTicketList: function() {
-      return $http.get('/api/getTicketList');
+      return $http.get('/api/tickets');
     },
-    getTicketInfo: function() {},
+    getTicketInfo: function(ticketId) {
+      return $http.get('/api/ticket/' + ticketId);
+    },
     updateTicket: function(ticket) {},
   };
 });
@@ -34,4 +36,8 @@ hiveApp.service('ConfigurationService', function($http) {
        return $http.get('/api/config');
     }
   };
+});
+
+hiveApp.factory('hiveCache', function($cacheFactory) {
+  return $cacheFactory('hiveCache');
 });

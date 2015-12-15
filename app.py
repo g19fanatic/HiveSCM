@@ -52,24 +52,48 @@ def getUsers():
 def getLabels():
     return getFile('labels.json')
 
-@app.route('/api/getTicketList')
-def getTicketList():
-    ticketPath = 'data/tickets'
-    return json.dumps(listdir(ticketPath))
-
-@app.route('/api/createTicket', methods=['POST'])
-def createTicket():
+def getTicketIds():
     currentFiles = listdir("data/tickets");
     ticketIds = []
     for f in currentFiles:
         ticketIds.append(f.strip(".json"))
     ticketIds.sort()
+    return ticketIds
+
+@app.route('/api/tickets')
+def getTicketList():
+    #pdb.set_trace()
+    ticketFiles = listdir("data/tickets")
+    ticketFiles.sort()
+    tickets = {}
+    ticketsInfo = []
+    for t in ticketFiles:
+        with open("data/tickets/" + t) as f:
+            ticket = json.loads(f.read())
+            ticketsInfo.append(ticket)
+
+    tickets['tickets'] = ticketsInfo
+    return json.dumps(tickets)
+
+@app.route('/api/ticket/<int:ticketId>')
+def getTicketInfo(ticketId):
+    tickets = getTicketIds()
+    ticket = {}
+    if (str(ticketId) in tickets):
+        ticket = json.loads(open('data/tickets/' + str(ticketId) + '.json').read())
+    else:
+        ticket['id'] = 0
+
+    return json.dumps(ticket)
+
+@app.route('/api/createTicket', methods=['POST'])
+def createTicket():
+    ticketIds = getTicketIds()
     newTicket = json.loads(request.data)['ticket']
     newTicket['id'] = int(ticketIds[-1]) + 1
     jsonData = json.dumps(newTicket, indent=4, sort_keys=True)
     open('data/tickets/' + str(newTicket['id']) + '.json', 'w').write(jsonData)
     return ""
-
 
 if __name__ == "__main__":
 
