@@ -5,10 +5,13 @@
       <div class="ui-widget-content"
             style="padding-top: 10px; padding-bottom: 10px;"
             ng-class="{'ui-state-hover': hover}" ng-mouseenter="hover=true;" ng-mouseleave="hover=false;">
-        <div class="grid-100">{{ticket.title}}</div>
+        <div class="grid-100">
+          <span style="text-align:left;">{{ticket.title}}</span>
+          <span ng-if="ticket.history.length > 1" style="text-align: center; float: right; border: 1px solid gray;" class="smaller-text ui-corner-all">{{ticket.history.length}} <span class="ui-icon ui-icon-comment"> </span> </span>
+        </div>
         <div class="grid-100 smaller-text">#{{ticket.id}} opened by {{ticket.createdBy}}</div>
-      </a>
       </div>
+      </a>
     </li>
   </ul>
 </div>
