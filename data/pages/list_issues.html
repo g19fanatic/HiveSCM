@@ -1,4 +1,13 @@
 <div class="prefix-10 grid-80 suffix-10 ui-widget parent-grid">
+  <div j-radio class="grid-50 small-text" style="margin-right:auto; margin-left:auto;">
+    <input type="radio" id="OPENED" name="ticketStatus">
+      <label for="OPENED"><span style="display: inline-block;" class="ui-icon ui-icon-info"></span>Opened</label>
+    </input>
+    <input type="radio" id="CLOSED" name="ticketStatus">
+      <label for="CLOSED">Closed<span style="display: inline-block;" class="ui-icon ui-icon-close"></span></label>
+    </input>
+  </div>
+  <div class="grid-50"></div>
   <ul style="list-style: none;">
     <li ng-repeat="ticket in tickets" >
       <a href="/ticket/view/{{ticket.id}}" style="text-decoration: none;">
@@ -7,7 +16,12 @@
             ng-class="{'ui-state-hover': hover}" ng-mouseenter="hover=true;" ng-mouseleave="hover=false;">
         <div class="grid-100">
           <span style="text-align:left;">{{ticket.title}}</span>
-          <span ng-if="ticket.history.length > 1" style="text-align: center; float: right; border: 1px solid gray;" class="smaller-text ui-corner-all">{{ticket.history.length}} <span class="ui-icon ui-icon-comment"> </span> </span>
+          <span ng-if="ticket.history.length > 1"
+                style="float: right; border: 1px solid gray; vertical-align: center; margin:auto;"
+                class="smaller-text ui-corner-all">
+                <span class="ui-icon ui-icon-comment" style="display: inline-block;"></span>
+                <span style="vertical-align: center; margin-top: auto; margin-bottom: auto;">{{ticket.history.length}}</span>
+          </span>
         </div>
         <div class="grid-100 smaller-text">#{{ticket.id}} opened by {{ticket.createdBy}}</div>
       </div>
