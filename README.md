@@ -1,8 +1,8 @@
 # HiveSCM
-Distributed, standalone, issue tracking system
+Distributed, standalone, issue/bug tracking system
 
-Each individual issue/ticket is tracked in a json file that goes along with your repo.<br>
-This allows the repo to keep track of its bugs and have a distributed SCM system.<br>
+Each individual issue/bug is tracked in a json file that goes along with your [git] repo.<br>
+This allows the repo to keep track of its bugs and have a distributed Source Code Management(SCM) system.<br>
 
 No installations necessary to run, just a virtualenv folder copy<br>
 Hopefully to be a pyinstaller/py2exe/cx_freeze single executable someday
