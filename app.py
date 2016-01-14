@@ -28,12 +28,15 @@ def send_datapages(filename):
     return send_from_directory('data/pages/', filename)
 
 def getFile(filename):
-    return make_response(open('data/' + filename).read())
+    return open('data/' + filename).read()
+
+def returnFile(filename):
+    return make_response(getFile(filename))
 
 #serving default index
 @app.route('/')
 def index():
-    return getFile('index.html')
+    return returnFile('index.html')
 
 #forward all app handled '/ticket/*' paths back to index if they hit the server (they shouldn't)
 @app.route('/ticket/<path:p>')
@@ -42,15 +45,15 @@ def returnToIndex(p):
 
 @app.route('/api/config')
 def getConfiguration():
-    return getFile('config.json')
+    return returnFile('config.json')
 
 @app.route('/api/users')
 def getUsers():
-    return getFile('users.json')
+    return returnFile('users.json')
 
 @app.route('/api/labels')
 def getLabels():
-    return getFile('labels.json')
+    return returnFile('labels.json')
 
 def getTicketIds():
     currentFiles = listdir("data/tickets");
@@ -96,7 +99,8 @@ def createTicket():
     return ""
 
 if __name__ == "__main__":
+  config = json.loads(getFile("config.json"))
 
   debugged_app = DebuggedApplication(app, evalex=True)
 
-  run_simple('0.0.0.0', 9876, debugged_app, use_reloader=True, use_debugger=True, use_evalex=True)
+  run_simple('0.0.0.0', int(config["serverPort"]), debugged_app, use_reloader=True, use_debugger=True, use_evalex=True)

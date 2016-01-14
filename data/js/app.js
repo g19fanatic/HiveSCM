@@ -27,6 +27,7 @@ function Ticket() {
 function RepoConfig() {
   this.repoName="";
   this.repoDesc="";
+  this.serverPort = 9876;
 }
 
 var hiveApp = angular.module("hiveApp", ['ngRoute']);

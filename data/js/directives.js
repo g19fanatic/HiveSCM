@@ -13,9 +13,10 @@ hiveApp.directive('jRadio',function() {
     link : function(scope, element, attrs) {
       element.buttonset();
       //select the first radio by default
-      element.each(function() {
-        $('input[type=radio]', this).get(0).checked = true;
-      });
+      setTimeout(function(){
+        $('#radio1').click();
+        element.buttonset('refresh');
+      },1);
     }
   }
 });

@@ -1,31 +1,33 @@
 <div class="prefix-10 grid-80 suffix-10 ui-widget parent-grid">
-  <div j-radio class="grid-50 small-text" style="margin-right:auto; margin-left:auto;">
-    <input type="radio" id="OPENED" name="ticketStatus">
-      <label for="OPENED"><span style="display: inline-block;" class="ui-icon ui-icon-info"></span>Opened</label>
+  <div j-radio class="grid-30 small-text" ng-init="filterParams.isOpen = true;" style="margin-right:auto; margin-left:auto;">
+    <input type="radio" id="radio1" ng-model="filterParams.isOpen" ng-value="true" name="ticketStatus">
+      <label for="radio1"><span style="display: inline-block;" class="ui-icon ui-icon-info"></span>Opened</label>
     </input>
-    <input type="radio" id="CLOSED" name="ticketStatus">
-      <label for="CLOSED">Closed<span style="display: inline-block;" class="ui-icon ui-icon-close"></span></label>
+    <input type="radio" id="radio2" ng-model="filterParams.isOpen" ng-value="false" name="ticketStatus">
+      <label for="radio2">Closed<span style="display: inline-block;" class="ui-icon ui-icon-close"></span></label>
     </input>
   </div>
-  <div class="grid-50"></div>
-  <ul style="list-style: none;">
-    <li ng-repeat="ticket in tickets" >
-      <a href="/ticket/view/{{ticket.id}}" style="text-decoration: none;">
-      <div class="ui-widget-content"
-            style="padding-top: 10px; padding-bottom: 10px;"
-            ng-class="{'ui-state-hover': hover}" ng-mouseenter="hover=true;" ng-mouseleave="hover=false;">
-        <div class="grid-100">
-          <span style="text-align:left;">{{ticket.title}}</span>
-          <span ng-if="ticket.history.length > 1"
-                style="float: right; border: 1px solid gray; vertical-align: center; margin:auto;"
-                class="smaller-text ui-corner-all">
-                <span class="ui-icon ui-icon-comment" style="display: inline-block;"></span>
-                <span style="vertical-align: center; margin-top: auto; margin-bottom: auto;">{{ticket.history.length}}</span>
-          </span>
+  <div class="grid-70"></div>
+  <div class="grid-100">
+    <ul style="list-style: none;">
+      <li ng-repeat="ticket in tickets | filter:filterParams" >
+        <a href="/ticket/view/{{ticket.id}}" style="text-decoration: none;">
+        <div class="ui-widget-content"
+             style="padding-top: 10px; padding-bottom: 10px;"
+             ng-class="{'ui-state-hover': hover, 'ui-corner-top':$first, 'ui-corner-bottom':$last }" ng-mouseenter="hover=true;" ng-mouseleave="hover=false;">
+          <div class="grid-100">
+            <span style="text-align:left;">{{ticket.title}}</span>
+            <span ng-if="ticket.history.length > 1"
+                  style="float: right; border: 1px solid gray; vertical-align: center; margin:auto;"
+                  class="smaller-text ui-corner-all">
+                  <span class="ui-icon ui-icon-comment" style="display: inline-block;"></span>
+                  <span style="vertical-align: center; margin-top: auto; margin-bottom: auto;">{{ticket.history.length}}</span>
+            </span>
+          </div>
+          <div class="grid-100 smaller-text">#{{ticket.id}} opened by {{ticket.createdBy}}</div>
         </div>
-        <div class="grid-100 smaller-text">#{{ticket.id}} opened by {{ticket.createdBy}}</div>
-      </div>
-      </a>
-    </li>
-  </ul>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

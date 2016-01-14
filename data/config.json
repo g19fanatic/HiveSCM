@@ -1,4 +1,5 @@
 {
   "repoName": "Repository Name",
-  "repoDesc": "Summary description of this repo"
+  "repoDesc": "Summary description of this repo",
+  "serverPort": 9876
 }

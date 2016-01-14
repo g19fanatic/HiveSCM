@@ -2,12 +2,12 @@
   <div class="ui-widget-header grid-100 ui-corner-top">
     #{{ticket.id}} - {{ticket.title}}
   </div>
-  <div class="small-text ui-widget-content grid-100">
+  <div class="small-text ui-widget-content ui-corner-bottom grid-100">
     Created by {{ticket.createdBy}} on {{ticket.createdOn}}
   </div>
   <br />
   <div class="ui-widget-header grid-100 ui-corner-top">Issue History</div>
-  <div ng-repeat="history in ticket.history" style="vertical-align:center; padding-top: 10px; padding-bottom: 10px;" class="ui-widget-content grid-100">
+  <div ng-repeat="history in ticket.history" ng-class="{'ui-corner-bottom': $last}" style="vertical-align:center; padding-top: 10px; padding-bottom: 10px;" class="ui-widget-content grid-100">
     {{history.description}}<br />
     <span class="small-text">by {{history.enteredBy}} on {{history.enteredOn}}</span><br />
   </div>
