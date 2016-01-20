@@ -47,12 +47,18 @@ hiveApp.controller('ListTicketsController',['$scope', 'TicketService', 'hiveCach
 
 }]);
 
-hiveApp.controller('ViewTicketController',['$scope', '$routeParams', 'TicketService', 'hiveCache', '$location', function($scope, $routeParams, TicketService, hiveCache, $location) {
+hiveApp.controller('ViewTicketController',
+                  ['$scope', '$routeParams', 'UserService',
+                   'TicketService', 'hiveCache', '$location','LabelService',
+                  function($scope, $routeParams, UserService,
+                           TicketService, hiveCache, $location, LabelService) {
+  window.MyScope = $scope;
   $scope.params = $routeParams;
+  UserService.getUsers().then(function(response) { $scope.users = response.data; });
+  LabelService.getLabels().then(function(response) { $scope.labels = response.data; });
 
   hiveCacheInfo = hiveCache.info();
-  if (hiveCacheInfo.size < 1)
-  {
+  if (hiveCacheInfo.size < 1) {
     TicketService.getTicketInfo($scope.params.ticketId).then(function success(response) {
       ticket = response.data;
       if (ticket.id != $scope.params.ticketId) {
@@ -69,4 +75,16 @@ hiveApp.controller('ViewTicketController',['$scope', '$routeParams', 'TicketServ
       }
     }
   }
+
+  $scope.addComment = function() {
+    alert($scope.selectedUser);
+  };
+
+  $scope.openTicket = function() {
+    alert("re-open ticket");
+  };
+
+  $scope.editedLabels = function(label) {
+    alert(label + " was clicked");
+  };
 }]);

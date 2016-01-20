@@ -1,14 +1,66 @@
 <div class="ui-widget prefix-10 grid-80 suffix-10 parent-grid">
-  <div class="ui-widget-header grid-100 ui-corner-top">
-    #{{ticket.id}} - {{ticket.title}}
+
+  <div id="ticketHeader">
+    <div class="ui-widget-header grid-100 ui-corner-top">
+      #{{ticket.id}} - {{ticket.title}}
+    </div>
+    <div class="small-text ui-widget-content ui-corner-bottom grid-100">
+      Created by {{ticket.createdBy}} on {{ticket.createdOn}}
+    </div>
   </div>
-  <div class="small-text ui-widget-content ui-corner-bottom grid-100">
-    Created by {{ticket.createdBy}} on {{ticket.createdOn}}
-  </div>
+
   <br />
-  <div class="ui-widget-header grid-100 ui-corner-top">Issue History</div>
-  <div ng-repeat="history in ticket.history" ng-class="{'ui-corner-bottom': $last}" style="vertical-align:center; padding-top: 10px; padding-bottom: 10px;" class="ui-widget-content grid-100">
-    {{history.description}}<br />
-    <span class="small-text">by {{history.enteredBy}} on {{history.enteredOn}}</span><br />
+
+  <div id="ticketLabels">
+    <div class="grid-100">
+      <button style="margin-left:auto; margin-right:auto;" j-button ng-repeat="label in labels" ng-click="editedLabels(label);" text="{{label}}"></button>
+    </div>
   </div>
+
+  <br />
+
+  <div id="ticketHistory">
+    <div class="ui-widget-header grid-100 ui-corner-top">Issue History</div>
+    <div ng-repeat="history in ticket.history" ng-class="{'ui-corner-bottom': $last}" style="vertical-align:center; padding-top: 10px; padding-bottom: 10px;" class="ui-widget-content grid-100">
+      {{history.description}}<br />
+      <span class="small-text">by {{history.enteredBy}} on {{history.enteredOn}}</span><br />
+    </div>
+  </div>
+
+  <br />
+
+  <div ng-show="ticket.isOpen" id="addComment">
+    <div class="ui-widget-header grid-100 ui-corner-top">
+      Add Comment
+    </div>
+    <div class="ui-widget-content ui-corner-bottom grid-100 parent-grid"><br/>
+
+      <div class="grid-100"><textarea ng-disabled="!ticket.isOpen" ng-model="newComment"
+                placeholder="Enter your comment here"
+                style="width:100%; resize:vertical;"></textarea><br>
+      </div>
+
+      <div class="grid-100">
+        <div style="display:block; margin-left:auto; margin-right:10px;">
+          <select ng-disabled="!ticket.isOpen"
+                  ng-model='selectedUser'
+                  ng-options="user for user in users"
+                  ng-init='selectedUser = null'
+                  placeholder="User">
+            <option value="">Select User</option>
+          </select>
+          <button ng-disabled="!ticket.isOpen" ng-click="addComment();">Add Comment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="reopenTicket" ng-hide="ticket.isOpen">
+    <div class="grid-100">
+      <button ng-disabled="ticket.isOpen" ng-click="openTicket();">Re-Open Ticket</button>
+    </div>
+  </div>
+
+  <br><br><br>
+
 </div>

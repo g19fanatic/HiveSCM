@@ -7,16 +7,28 @@ hiveApp.directive('jMenu',function() {
   }
 });
 
-hiveApp.directive('jRadio',function() {
+hiveApp.directive('jRadio',[ '$timeout', function($timeout) {
   return {
     restrict: "A",
     link : function(scope, element, attrs) {
       element.buttonset();
       //select the first radio by default
-      setTimeout(function(){
+      $timeout(function(){
         $('#radio1').click();
         element.buttonset('refresh');
       },1);
     }
   }
-});
+}]);
+
+hiveApp.directive('jButton', ['$timeout', function($timeout) {
+  return {
+    restrict: "A",
+    link: function(scope, element, attrs) {
+      $timeout(function() {
+        element.text(attrs.text).button();
+      },10);
+
+    }
+  }
+}]);
