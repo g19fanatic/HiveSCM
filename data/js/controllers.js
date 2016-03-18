@@ -68,7 +68,9 @@ hiveApp.controller('ViewTicketController',
       }
     },function error(response) {});
   } else {
-    for (ticket of hiveCache.get('tickets')) {
+	allTickets = hiveCache.get('tickets');
+    for (index in allTickets){
+	    ticket = allTickets[index];
       if ($scope.params.ticketId == ticket.id) {
         ticketSet = true;
         $scope.ticket = ticket;
