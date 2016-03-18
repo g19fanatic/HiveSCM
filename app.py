@@ -1,6 +1,7 @@
 from flask import Flask, request, url_for
 from flask import redirect, send_from_directory, make_response
 from werkzeug.serving import run_simple
+from werkzeug.serving import WSGIRequestHandler
 from werkzeug.debug import DebuggedApplication
 
 from os import listdir
@@ -100,6 +101,7 @@ def createTicket():
 
 if __name__ == "__main__":
   config = json.loads(getFile("config.json"))
+  WSGIRequestHandler.protocol_version = "HTTP/1.1"
 
   debugged_app = DebuggedApplication(app, evalex=True)
 
