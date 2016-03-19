@@ -10,7 +10,7 @@
   <div class="grid-70"></div>
   <div class="grid-100">
     <ul style="list-style: none;">
-      <li ng-repeat="ticket in tickets | filter:filterParams | orderBy: -id" >
+      <li ng-repeat="ticket in tickets | filter:filterParams | orderBy:'id':true" >
         <a href="/ticket/view/{{ticket.id}}" style="text-decoration: none;">
         <div class="ui-widget-content"
              style="padding-top: 10px; padding-bottom: 10px;"
